@@ -1,6 +1,7 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
+import { LivrosResultado } from '../module/interfaces';
 
 @Injectable({
   providedIn: 'root'
@@ -9,9 +10,12 @@ export class LivroService {
   private readonly API = 'https://www.googleapis.com/books/v1/volumes';
   constructor(private httpClientModule: HttpClient) { }
 
-  buscar(valorDigitado: string): Observable<any> {
+  buscar(valorDigitado: string): Observable<LivrosResultado> {
     const params = new HttpParams().append('q', valorDigitado);
-    return this.httpClientModule.get(this.API, { params })
+    return this.httpClientModule.get<LivrosResultado>(this.API, { params })
+      .pipe(
+        tap((retornoAPI) => console.log("FLUXO TASP",retornoAPI))
+      )
 
   }
 }
