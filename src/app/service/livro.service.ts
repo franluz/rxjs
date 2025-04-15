@@ -16,9 +16,7 @@ export class LivroService {
     const params = new HttpParams().append('q', valorDigitado);
     return this.httpClientModule.get<LivrosResultado>(this.API, { params })
       .pipe(
-        tap((retornoAPI) => console.log("FLUXO TASP", retornoAPI)),
-        map(resultado => resultado.items),
-        tap((resultado) => console.log("itens de resultado", resultado))
+         map(resultado => resultado.items),
       )
 
   }
