@@ -1,5 +1,5 @@
 export interface Livro {
-  title?: String;
+  title?: string;
   authors?: string[];
   publisher?: string;
   publishedDate?: string;
